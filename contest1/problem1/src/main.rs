@@ -1,67 +1,57 @@
-use std::cmp::Reverse;
-use std::collections::BinaryHeap;
 use std::io;
 use std::io::BufRead;
 
-fn count_odd(a: &[i32]) -> usize {
-    a.iter().filter(|i| **i % 2 == 1).count()
+pub type Result<T, E = Error> = std::result::Result<T, E>;
+
+type Error = Box<dyn std::error::Error + 'static>;
+
+fn main() -> Result<()> {
+    let integers = get_input()?;
+    let sum = minimum_possible_sum(integers)?;
+    println!("{sum}");
+    Ok(())
 }
 
-fn count_even(a: &[i32]) -> usize {
-    a.iter().filter(|i| **i % 2 == 0).count()
-}
-
-fn partition_even_odd(a: Vec<i32>) -> (Vec<i32>, Vec<i32>) {
-    a.into_iter().partition(|element| element % 2 == 0)
-}
-
-fn sum_mins(bound: i32, numbers: Vec<i32>) -> i32 {
-    let mut heap = numbers.into_iter().map(Reverse).collect::<BinaryHeap<_>>();
-    let mut count = 0;
-    for _ in 0..bound {
-        if let Some(Reverse(n)) = heap.pop() {
-            count += n;
-        } else {
-            panic!("")
-            // return count;
-        }
-    }
-    count
-}
-
-fn main() {
+fn get_input() -> Result<Vec<u32>> {
     let stdin = io::stdin();
     let stdin = stdin.lock();
 
-    let lines = stdin.lines().collect::<io::Result<Vec<String>>>().unwrap();
+    let lines = stdin.lines().collect::<Result<Vec<_>, _>>()?;
     assert_eq!(lines.len(), 2);
 
-    let n = lines[0].parse::<usize>().unwrap();
-    let mut a = lines[1]
+    let integers_count_line = lines.get(0).ok_or("Missing first line")?;
+    let integers_line = lines.get(1).ok_or("Missing second line")?;
+
+    let integers_count = integers_count_line.parse::<usize>()?;
+    let integers = integers_line
         .split_whitespace()
-        .map(|number| number.parse().unwrap())
-        .collect::<Vec<i32>>();
+        .map(|integer| integer.parse::<u32>())
+        .collect::<Result<Vec<_>, _>>()?;
+    assert_eq!(integers.len(), integers_count);
 
-    assert_eq!(a.len(), n);
+    Ok(integers)
+}
 
-    let even = count_even(&a);
-    let odd = count_odd(&a);
-    assert_eq!(even + odd, n);
+fn minimum_possible_sum(integers: Vec<u32>) -> Result<u32> {
+    let integers_count = integers.len();
+    let (even_integers, odd_integers) = integers
+        .into_iter()
+        .partition::<Vec<_>, _>(|integer| *integer % 2 == 0);
+    let even_integers_count = even_integers.len();
+    let odd_integers_count = odd_integers.len();
 
-    let abs_diff = i32::abs(even as i32 - odd as i32);
-    if abs_diff <= 1 {
-        println!("0");
-        return;
+    // >=1.60.0: usize::abs_diff(even_integers_count, odd_integers_count)
+    if isize::abs(even_integers_count as isize - odd_integers_count as isize) <= 1 {
+        return Ok(0);
     }
 
-    // a.sort_unstable();
-
-    let (evens, odds) = partition_even_odd(a);
-    if even > odd {
-        let even_sum = sum_mins(even as i32 - (odd as i32 + 1), evens);
-        println!("{even_sum}");
+    let (mut integers, take_count) = if even_integers_count > odd_integers_count {
+        (even_integers, integers_count - (2 * odd_integers_count + 1))
     } else {
-        let odd_sum = sum_mins(odd as i32 - (even as i32 + 1), odds);
-        println!("{odd_sum}");
-    }
+        (odd_integers, integers_count - (2 * even_integers_count + 1))
+    };
+
+    integers.sort_unstable();
+    let sum = integers.into_iter().take(take_count).sum();
+    Ok(sum)
 }
