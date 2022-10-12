@@ -1,12 +1,13 @@
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
-use std::io::Read;
+use std::io;
+use std::io::BufRead;
 
-fn count_odd(a: &Vec<i32>) -> usize {
+fn count_odd(a: &[i32]) -> usize {
     a.iter().filter(|i| **i % 2 == 1).count()
 }
 
-fn count_even(a: &Vec<i32>) -> usize {
+fn count_even(a: &[i32]) -> usize {
     a.iter().filter(|i| **i % 2 == 0).count()
 }
 
@@ -21,25 +22,24 @@ fn sum_mins(bound: i32, numbers: Vec<i32>) -> i32 {
         if let Some(Reverse(n)) = heap.pop() {
             count += n;
         } else {
-            return count;
+            panic!("")
+            // return count;
         }
     }
     count
 }
 
 fn main() {
-    let mut a_string = String::new();
-    let stdin = std::io::stdin();
-    let mut stdin = stdin.lock();
+    let stdin = io::stdin();
+    let stdin = stdin.lock();
 
-    stdin.read_to_string(&mut a_string).unwrap();
-    let lines = a_string.lines().collect::<Vec<_>>();
+    let lines = stdin.lines().collect::<io::Result<Vec<String>>>().unwrap();
     assert_eq!(lines.len(), 2);
-    let n = lines[0].parse::<usize>().unwrap();
 
-    let a = lines[1]
+    let n = lines[0].parse::<usize>().unwrap();
+    let mut a = lines[1]
         .split_whitespace()
-        .map(|i| i.parse().unwrap())
+        .map(|number| number.parse().unwrap())
         .collect::<Vec<i32>>();
 
     assert_eq!(a.len(), n);
@@ -54,19 +54,14 @@ fn main() {
         return;
     }
 
-    let (odds, evens) = partition_even_odd(a);
-    let odd_sum = sum_mins(abs_diff - 1, odds);
-    let even_sum = sum_mins(abs_diff - 1, evens);
+    // a.sort_unstable();
 
-    if odd_sum == 0 {
+    let (evens, odds) = partition_even_odd(a);
+    if even > odd {
+        let even_sum = sum_mins(even as i32 - (odd as i32 + 1), evens);
         println!("{even_sum}");
-        return;
-    }
-
-    if even_sum == 0 {
+    } else {
+        let odd_sum = sum_mins(odd as i32 - (even as i32 + 1), odds);
         println!("{odd_sum}");
-        return;
     }
-    let min_sum = std::cmp::min(odd_sum, even_sum);
-    println!("{min_sum}");
 }
