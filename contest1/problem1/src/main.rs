@@ -1,8 +1,7 @@
 use std::io;
 use std::io::BufRead;
 
-pub type Result<T, E = Error> = std::result::Result<T, E>;
-
+type Result<T, E = Error> = std::result::Result<T, E>;
 type Error = Box<dyn std::error::Error + 'static>;
 
 fn main() -> Result<()> {
