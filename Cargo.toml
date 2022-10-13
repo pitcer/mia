@@ -1,5 +1,5 @@
 [workspace]
-members = ["contest1/problem1"]
+members = ["contest1/problem1", "contest1/problem2"]
 
 # >=1.64.0:
 # [workspace.package]
