@@ -54,3 +54,29 @@ fn minimum_possible_sum(integers: Vec<u32>) -> Result<u32> {
     let sum = integers.into_iter().take(take_count).sum();
     Ok(sum)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_example_1() -> Result<()> {
+        let actual = minimum_possible_sum(vec![1, 5, 7, 8, 2])?;
+        assert_eq!(0, actual);
+        Ok(())
+    }
+
+    #[test]
+    fn test_example_2() -> Result<()> {
+        let actual = minimum_possible_sum(vec![5, 1, 2, 4, 6, 3])?;
+        assert_eq!(0, actual);
+        Ok(())
+    }
+
+    #[test]
+    fn test_example_3() -> Result<()> {
+        let actual = minimum_possible_sum(vec![1000000, 1000000])?;
+        assert_eq!(1000000, actual);
+        Ok(())
+    }
+}
