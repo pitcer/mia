@@ -13,8 +13,7 @@ trait Problem<T>: Sized {
 }
 
 fn main() -> Result<()> {
-    let stdin = io::stdin();
-    let stdin = stdin.lock();
+    let stdin = io::stdin().lock();
     let problem = Tape::from_reader(stdin)?;
     let result = problem.solve()?;
     println!("{result}");

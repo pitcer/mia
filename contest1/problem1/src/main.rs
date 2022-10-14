@@ -12,8 +12,7 @@ fn main() -> Result<()> {
 }
 
 fn get_input() -> Result<Vec<u32>> {
-    let stdin = io::stdin();
-    let stdin = stdin.lock();
+    let stdin = io::stdin().lock();
 
     let lines = stdin.lines().collect::<Result<Vec<_>, _>>()?;
     assert_eq!(lines.len(), 2);
