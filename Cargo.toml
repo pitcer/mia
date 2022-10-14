@@ -1,5 +1,5 @@
 [workspace]
-members = ["contest1/problem1", "contest1/problem2"]
+members = ["contest_1/problem_a", "contest_1/problem_b"]
 
 [workspace.package]
 version = "0.1.0"

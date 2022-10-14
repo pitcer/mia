@@ -3,9 +3,9 @@
 version = 3
 
 [[package]]
-name = "problem1"
+name = "problem_a"
 version = "0.1.0"
 
 [[package]]
-name = "problem2"
+name = "problem_b"
 version = "0.1.0"

@@ -1,5 +1,5 @@
 [package]
-name = "problem1"
+name = "problem_a"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
