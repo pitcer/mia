@@ -46,7 +46,7 @@ impl Problem<u32> for Tape {
         let second_line = lines.get(1).ok_or("Missing second line")?;
 
         let first_line = split_line(first_line)?;
-        let broken_segment_count = *first_line.get(0).ok_or("Missing broken segment count")?;
+        let broken_segment_count = *first_line.first().ok_or("Missing broken segment count")?;
         let segment_count = *first_line.get(1).ok_or("Missing segment count")?;
         let tape_pieces = *first_line.get(2).ok_or("Missing tape pieces")?;
         let broken_segments = split_line(second_line)?;

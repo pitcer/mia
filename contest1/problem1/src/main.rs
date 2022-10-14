@@ -39,8 +39,7 @@ fn minimum_possible_sum(integers: Vec<u32>) -> Result<u32> {
     let even_integers_count = even_integers.len();
     let odd_integers_count = odd_integers.len();
 
-    // >=1.60.0: usize::abs_diff(even_integers_count, odd_integers_count)
-    if isize::abs(even_integers_count as isize - odd_integers_count as isize) <= 1 {
+    if usize::abs_diff(even_integers_count, odd_integers_count) <= 1 {
         return Ok(0);
     }
 
