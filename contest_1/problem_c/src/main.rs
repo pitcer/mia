@@ -101,6 +101,8 @@ impl Problem<bool> for TransposingMatrices {
 
 impl Matrix {
     fn get_reverse_diagonal(&self, index: usize) -> Vec<u32> {
+        debug_assert!(index < self.column_count() + self.row_count() - 1);
+
         let mut result = Vec::with_capacity(cmp::max(self.column_count(), self.row_count()));
         let (mut row_index, mut column_index) = self.diagonal_index_to_element_index(index);
         while column_index < self.column_count() {
