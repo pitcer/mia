@@ -1,7 +1,7 @@
 [workspace]
 members = [
     "contest_1/problem_a", "contest_1/problem_b", "contest_1/problem_c",
-    "contest_2/problem_a", "contest_2/problem_b"]
+    "contest_2/problem_a", "contest_2/problem_b", "contest_2/problem_c"]
 
 [workspace.package]
 version = "0.1.0"
