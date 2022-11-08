@@ -75,13 +75,12 @@ impl Problem for Siege {
     }
 
     fn solve(self) -> Result<StandingWarriors> {
-        let mut accumulator: u64 = 0;
         let strength_prefix_sums = self
             .warriors_strengths
             .into_iter()
-            .map(|value| {
-                accumulator += value as u64;
-                accumulator
+            .scan(0u64, |accumulator, value| {
+                *accumulator += value as u64;
+                Some(*accumulator)
             })
             .collect();
         let warriors = StandingWarriors {
