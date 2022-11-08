@@ -8,5 +8,6 @@ members = [
     "contest_1/problem_a", "contest_1/problem_b", "contest_1/problem_c",
     "contest_2/problem_a", "contest_2/problem_b", "contest_2/problem_c", "contest_2/problem_d",
     "contest_2/problem_e",
-    "contest_3/problem_a", "contest_3/problem_b"
+    "contest_3/problem_a", "contest_3/problem_b",
+    "contest_4/problem_a"
 ]
