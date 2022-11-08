@@ -9,5 +9,5 @@ members = [
     "contest_2/problem_a", "contest_2/problem_b", "contest_2/problem_c", "contest_2/problem_d",
     "contest_2/problem_e",
     "contest_3/problem_a", "contest_3/problem_b",
-    "contest_4/problem_a"
+    "contest_4/problem_a", "contest_4/problem_b"
 ]
