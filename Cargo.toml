@@ -1,7 +1,7 @@
 [workspace.package]
 version = "0.1.0"
 edition = "2021"
-rust-version = "1.64"
+rust-version = "1.65"
 
 [workspace]
 members = [
@@ -10,5 +10,6 @@ members = [
     "contest_2/problem_e",
     "contest_3/problem_a", "contest_3/problem_b",
     "contest_4/problem_a", "contest_4/problem_b",
-    "contest_5/problem_a"
+    "contest_5/problem_a",
+    "contest_6/problem_a"
 ]

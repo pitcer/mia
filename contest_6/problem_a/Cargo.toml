@@ -1,0 +1,5 @@
+[package]
+name = "contest_6_problem_a"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
