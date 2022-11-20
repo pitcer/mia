@@ -1,3 +1,5 @@
+extern crate core;
+
 use std::io;
 use std::io::{BufRead, Lines};
 
@@ -51,16 +53,10 @@ impl MultiplicationTable {
         Ok(MultiplicationTable { size, number })
     }
 
-    fn solve(self) -> Result<u32> {
-        let mut solutions = 0;
-        for divisor in 1..=self.size {
-            if self.number % divisor == 0 {
-                let second_divisor = self.number / divisor;
-                if second_divisor <= self.size {
-                    solutions += 1;
-                }
-            }
-        }
+    fn solve(self) -> Result<usize> {
+        let solutions = (1..=self.size)
+            .filter(|divisor| self.number % divisor == 0 && self.number / divisor <= self.size)
+            .count();
 
         Ok(solutions)
     }
