@@ -12,5 +12,5 @@ members = [
     "contest_4/problem_a", "contest_4/problem_b",
     "contest_5/problem_a",
     "contest_6/problem_a",
-    "contest_7/problem_a"
+    "contest_7/problem_a", "contest_7/problem_c"
 ]

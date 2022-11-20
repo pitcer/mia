@@ -61,3 +61,7 @@ version = "0.1.0"
 [[package]]
 name = "contest_7_problem_a"
 version = "0.1.0"
+
+[[package]]
+name = "contest_7_problem_c"
+version = "0.1.0"
