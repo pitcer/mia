@@ -3,6 +3,10 @@
 version = 3
 
 [[package]]
+name = "contest_10_problem_a"
+version = "0.1.0"
+
+[[package]]
 name = "contest_11_problem_a"
 version = "0.1.0"
 

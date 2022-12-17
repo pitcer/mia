@@ -15,5 +15,6 @@ members = [
     "contest_7/problem_a", "contest_7/problem_c",
     "contest_8/problem_a", "contest_8/problem_b",
     "contest_9/problem_a", "contest_9/problem_b",
+    "contest_10/problem_a",
     "contest_11/problem_a", "contest_11/problem_b",
 ]

@@ -1,5 +1,3 @@
-extern crate core;
-
 use std::io;
 use std::io::{BufRead, Lines};
 
