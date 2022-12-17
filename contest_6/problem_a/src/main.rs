@@ -61,7 +61,7 @@ impl LectureSleep {
     fn solve(self) -> Result<u32> {
         let technique_start_index = self
             .theorems
-            .windows(self.awake_duration as usize)
+            .windows(self.awake_duration)
             .enumerate()
             .map(|(index, theorems)| {
                 let theorems_by_technique = theorems
