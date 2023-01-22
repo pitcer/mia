@@ -43,24 +43,26 @@ fn main() -> Result<()> {
         let line = line?;
         parse_next!(line -> let bag: u64 = 1..=10u64.pow(18));
         parse_next!(line -> let box_count: usize = 1..=10usize.pow(5));
-        parse_next!(lines => let boxes: Vec<u32> = [1..=10u32.pow(9); box_count]);
+        let boxes = lines.next().ok_or("Missing next line")??;
         let result = solve(bag, boxes).map(|result| result as i32).unwrap_or(-1);
         println!("{result}");
     }
     Ok(())
 }
 
-fn solve(bag: u64, boxes: Vec<u32>) -> Option<u32> {
+fn solve(bag: u64, boxes: String) -> Option<u32> {
     let bag_length = mem::size_of_val(&bag) * 8 - bag.leading_zeros() as usize;
     let boxes_length = cmp::max(mem::size_of::<u32>() * 8, bag_length);
 
-    let mut boxes = boxes
-        .into_iter()
-        .fold(vec![0; boxes_length + 1], |mut boxes, current| {
-            let index = current.trailing_zeros() as usize;
-            boxes[index] += 1;
-            boxes
-        });
+    let mut boxes =
+        boxes
+            .split_whitespace()
+            .fold(vec![0; boxes_length + 1], |mut boxes, current| {
+                let current = current.parse::<u32>().expect("Input is correct");
+                let index = current.trailing_zeros() as usize;
+                boxes[index] += 1;
+                boxes
+            });
 
     let mut all_divisions = 0;
     let mut divisions = 0;
@@ -101,19 +103,19 @@ mod tests {
 
     #[test]
     fn test_example_1() {
-        let actual = solve(10, vec![1, 32, 1]);
+        let actual = solve(10, "1 32 1".to_owned());
         assert_eq!(Some(2), actual);
     }
 
     #[test]
     fn test_example_2() {
-        let actual = solve(23, vec![16, 1, 4, 1]);
+        let actual = solve(23, "16 1 4 1".to_owned());
         assert_eq!(None, actual);
     }
 
     #[test]
     fn test_example_3() {
-        let actual = solve(20, vec![2, 1, 16, 1, 8]);
+        let actual = solve(20, "2 1 16 1 8".to_owned());
         assert_eq!(Some(0), actual);
     }
 }
