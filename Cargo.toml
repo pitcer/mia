@@ -19,4 +19,5 @@ members = [
     "contest_11/problem_a", "contest_11/problem_b",
     "contest_12/problem_a", "contest_12/problem_b",
     "contest_13/problem_a", "contest_13/problem_c",
+    "contest_14/problem_a", "contest_14/problem_b",
 ]
