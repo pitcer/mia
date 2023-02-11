@@ -104,10 +104,18 @@ impl Problem<u32> for Toy {
         let mut vertices = (0..self.parts.vertices.len()).collect::<Vec<_>>();
         vertices.sort_unstable_by_key(|vertex_id| self.parts.vertices[vertex_id].value);
         while let Some(vertex_id) = vertices.pop() {
-            let vertex = self.parts.vertices.remove(&vertex_id).ok_or("Missing vertex")?;
+            let vertex = self
+                .parts
+                .vertices
+                .remove(&vertex_id)
+                .ok_or("Missing vertex")?;
             let mut neighbours_value_sum = 0;
             for neighbour_id in vertex.neighbours {
-                let neighbour = self.parts.vertices.get_mut(&neighbour_id).ok_or("Missing vertex")?;
+                let neighbour = self
+                    .parts
+                    .vertices
+                    .get_mut(&neighbour_id)
+                    .ok_or("Missing vertex")?;
                 neighbour.neighbours.remove(&vertex_id);
                 neighbours_value_sum += neighbour.value;
             }

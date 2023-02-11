@@ -1,7 +1,7 @@
 extern crate core;
 
-use std::{io, vec};
 use std::io::{BufRead, Lines};
+use std::{io, vec};
 
 macro_rules! parse_next {
     ($lines:expr => let $name:ident: $ty:ty = [$range:expr; $count:expr]) => {

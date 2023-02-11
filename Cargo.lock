@@ -39,6 +39,10 @@ name = "contest_14_problem_b"
 version = "0.1.0"
 
 [[package]]
+name = "contest_14_problem_c"
+version = "0.1.0"
+
+[[package]]
 name = "contest_15_problem_a"
 version = "0.1.0"
 
@@ -120,4 +124,8 @@ version = "0.1.0"
 
 [[package]]
 name = "contest_9_problem_b"
+version = "0.1.0"
+
+[[package]]
+name = "scanner"
 version = "0.1.0"
