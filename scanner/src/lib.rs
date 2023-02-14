@@ -1,5 +1,3 @@
-#![allow(deprecated_where_clause_location)]
-
 use std::io::{Stdin, StdinLock};
 use std::ops::RangeBounds;
 use std::str::{FromStr, SplitWhitespace};
@@ -34,10 +32,9 @@ impl<'a> StringScanner<'a> {
 }
 
 impl<'b> Scanner for StringScanner<'b> {
-    type LineScanner<'a>
+    type LineScanner<'a> = LineSplitScanner<'a>
     where
-        Self: 'a,
-    = LineSplitScanner<'a>;
+        Self: 'a;
 
     fn next_line(&mut self) -> Result<Self::LineScanner<'_>> {
         let next_line = self.input.next().ok_or("Missing next line")?;
@@ -74,10 +71,9 @@ impl StdinScanner {
 }
 
 impl Scanner for StdinScanner {
-    type LineScanner<'a>
+    type LineScanner<'a> = LineSplitScanner<'a>
     where
-        Self: 'a,
-    = LineSplitScanner<'a>;
+        Self: 'a;
 
     fn next_line(&mut self) -> Result<Self::LineScanner<'_>> {
         let next_line = self.input.next().ok_or("Missing next line")??;
